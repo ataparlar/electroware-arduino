@@ -1,0 +1,319 @@
+// motor 1
+int inp11 = 13;
+int inp12 = 12;
+int ena1 = 10;
+int motor1_speed;
+int motor1_direction;
+
+// motor 2
+int inp21 = 9;
+int inp22 = 8;
+int ena2 = 11;
+int motor2_speed;
+int motor2_direction;
+
+// motor 3
+int inp31 = 4;
+int inp32 = 3;
+int ena3 = 5;
+int motor3_speed;
+int motor3_direction;
+
+// motor 4
+int inp41 = 2;
+int inp42 = 1;
+int ena4 = 6;
+int motor4_speed;
+int motor4_direction;
+
+// variables
+String pid_string = "s0122120110190147f";
+long random_pmw1 = random(255);
+long random_pmw2 = random(255);
+long random_pmw3 = random(255);
+long random_pmw4 = random(255);
+
+
+
+void setup() {
+  // serial communication establishing
+  Serial.begin(9600);
+  
+  // some variables from pid_string
+  motor1_speed = pid_string.substring(2,5).toInt();
+  motor1_direction = pid_string.substring(1,2).toInt();
+  
+  motor2_speed = pid_string.substring(6,9).toInt();
+  motor2_direction = pid_string.substring(5,6).toInt();
+  
+  motor3_speed = pid_string.substring(10,13).toInt();
+  motor3_direction = pid_string.substring(9,10).toInt();
+  
+  motor4_speed = pid_string.substring(14,17).toInt();
+  motor4_direction = pid_string.substring(13,14).toInt();
+  
+  
+  //for motor 1
+  pinMode(inp11, OUTPUT);
+  pinMode(inp12, OUTPUT);
+  pinMode(ena1, OUTPUT);
+  
+  //for motor 2
+  pinMode(inp21, OUTPUT);
+  pinMode(inp22, OUTPUT);
+  pinMode(ena2, OUTPUT);
+  
+  //for motor 3
+  pinMode(inp31, OUTPUT);
+  pinMode(inp32, OUTPUT);
+  pinMode(ena3, OUTPUT);
+  
+  //for motor 4
+  pinMode(inp41, OUTPUT);
+  pinMode(inp42, OUTPUT);
+  pinMode(ena4, OUTPUT);
+  
+  analogWrite(ena1, random_pmw1);
+  analogWrite(ena2, random_pmw2);
+  analogWrite(ena3, random_pmw3);
+  analogWrite(ena4, random_pmw4);
+  
+  
+  // for motor 1
+  
+  // motor yönü pozitif
+  if (motor1_direction == 1)
+  {
+    digitalWrite(inp11, HIGH);
+  	digitalWrite(inp12, LOW);
+  }
+  // motor yönü negatif
+  else if (motor1_direction == 0)
+  {
+    digitalWrite(inp11, LOW);
+  	digitalWrite(inp12, HIGH);
+  }
+  
+  
+  // for motor 2
+  
+  // motor yönü pozitif
+  if (motor2_direction == 1)
+  {
+    digitalWrite(inp21, HIGH);
+  	digitalWrite(inp22, LOW);
+  }
+  // motor yönü negatif
+  else if (motor2_direction == 0)
+  {
+    digitalWrite(inp21, LOW);
+  	digitalWrite(inp22, HIGH);
+  }
+  
+  
+  // for motor 3
+  
+  // motor yönü pozitif
+  if (motor3_direction == 1)
+  {
+    digitalWrite(inp31, HIGH);
+  	digitalWrite(inp32, LOW);
+  }
+  // motor yönü negatif
+  else if (motor3_direction == 0)
+  {
+    digitalWrite(inp31, LOW);
+  	digitalWrite(inp32, HIGH);
+  }
+  
+  
+  // for motor 4
+  
+  // motor yönü pozitif
+  if (motor4_direction == 1)
+  {
+    digitalWrite(inp41, HIGH);
+  	digitalWrite(inp42, LOW);
+  }
+  // motor yönü negatif
+  else if (motor4_direction == 0)
+  {
+    digitalWrite(inp41, LOW);
+  	digitalWrite(inp42, HIGH);
+  }
+  
+}
+
+void loop()
+{
+  // for motor 1
+  
+  // random, motordan küçükse
+  if (random_pmw1 < motor1_speed)
+  {
+    for (random_pmw1; random_pmw1<motor1_speed; random_pmw1+=2)
+    {
+      analogWrite(ena1, random_pmw1);
+    }
+  }
+  // random, motordan büyükse
+  else if (random_pmw1 > motor1_speed)
+  {
+    
+    for (random_pmw1; random_pmw1>motor1_speed; random_pmw1-=2)
+    {
+      analogWrite(ena1, random_pmw1);
+    }
+  }
+  // random, motora eşitse
+  else if (motor1_speed == random_pmw1)
+  {
+    analogWrite(ena1, motor1_speed);
+  }
+  
+  
+  // for motor 2
+  
+  // random, motordan küçükse
+  if (random_pmw2 < motor2_speed)
+  {
+    for (random_pmw2; random_pmw2<motor2_speed; random_pmw2+=2)
+    {
+      analogWrite(ena2, random_pmw2);
+    }
+  }
+  // random, motordan büyükse
+  else if (random_pmw2 > motor2_speed)
+  {
+    
+    for (random_pmw2; random_pmw2>motor2_speed; random_pmw2-=2)
+    {
+      analogWrite(ena2, random_pmw2);
+    }
+  }
+  // random, motora eşitse
+  else if (motor2_speed == random_pmw2)
+  {
+    analogWrite(ena2, motor2_speed);
+  }
+  
+  
+  // for motor 3
+  
+  // random, motordan küçükse
+  if (random_pmw3 < motor3_speed)
+  {
+    for (random_pmw3; random_pmw3<motor3_speed; random_pmw3+=2)
+    {
+      analogWrite(ena3, random_pmw3);
+    }
+  }
+  // random, motordan büyükse
+  else if (random_pmw3 > motor3_speed)
+  {
+    
+    for (random_pmw3; random_pmw3>motor3_speed; random_pmw3-=2)
+    {
+      analogWrite(ena3, random_pmw3);
+    }
+  }
+  // random, motora eşitse
+  else if (motor3_speed == random_pmw3)
+  {
+    analogWrite(ena3, motor3_speed);
+  }
+  
+  
+  // for motor 4
+  
+  // random, motordan küçükse
+  if (random_pmw4 < motor4_speed)
+  {
+    for (random_pmw4; random_pmw4<motor4_speed; random_pmw4+=2)
+    {
+      analogWrite(ena4, random_pmw4);
+    }
+  }
+  // random, motordan büyükse
+  else if (random_pmw4 > motor4_speed)
+  {
+    
+    for (random_pmw4; random_pmw4>motor4_speed; random_pmw4-=2)
+    {
+      analogWrite(ena4, random_pmw4);
+    }
+  }
+  // random, motora eşitse
+  else if (motor4_speed == random_pmw4)
+  {
+    analogWrite(ena4, motor4_speed);
+  }
+  
+  
+  
+  
+  
+  // for motor 1
+  
+  // motor yönü pozitif
+  if (motor1_direction == 1)
+  {
+    digitalWrite(inp11, HIGH);
+  	digitalWrite(inp12, LOW);
+  }
+  // motor yönü negatif
+  else if (motor1_direction == 0)
+  {
+    digitalWrite(inp11, LOW);
+  	digitalWrite(inp12, HIGH);
+  }
+  
+  
+  // for motor 2
+  
+  // motor yönü pozitif
+  if (motor2_direction == 1)
+  {
+    digitalWrite(inp21, HIGH);
+  	digitalWrite(inp22, LOW);
+  }
+  // motor yönü negatif
+  else if (motor2_direction == 0)
+  {
+    digitalWrite(inp21, LOW);
+  	digitalWrite(inp22, HIGH);
+  }
+  
+  
+  // for motor 3
+  
+  // motor yönü pozitif
+  if (motor3_direction == 1)
+  {
+    digitalWrite(inp31, HIGH);
+  	digitalWrite(inp32, LOW);
+  }
+  // motor yönü negatif
+  else if (motor3_direction == 0)
+  {
+    digitalWrite(inp31, LOW);
+  	digitalWrite(inp32, HIGH);
+  }
+  
+  
+  // for motor 4
+  
+  // motor yönü pozitif
+  if (motor4_direction == 1)
+  {
+    digitalWrite(inp41, HIGH);
+  	digitalWrite(inp42, LOW);
+  }
+  // motor yönü negatif
+  else if (motor4_direction == 0)
+  {
+    digitalWrite(inp41, LOW);
+  	digitalWrite(inp42, HIGH);
+  }
+ 
+}
